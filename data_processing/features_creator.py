@@ -1,7 +1,9 @@
-from collections import Counter
-from news_scraper import Scraper
-from tokenizer import Tokenizer
 import threading
+from collections import Counter
+
+from news_scraper import Scraper
+
+from data_processing.tokenizer import Tokenizer
 
 
 class FeaturesCreator:

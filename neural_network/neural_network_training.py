@@ -1,12 +1,12 @@
-import tensorflow as tf
-import numpy as np
 import pickle
-from neural_network_model import NeuralNetwork
-from news_processor import NewsProcessor
 
+import numpy as np
+import tensorflow as tf
+
+from neural_network.neural_network_model import NeuralNetwork
 
 # initialization
-train_x, train_y = pickle.load(open("prepared_data/trainingset.data", "rb"))
+train_x, train_y = pickle.load(open("../prepared_data/trainingset.data", "rb"))
 # print(train_x)
 # print(train_y)
 input_data_size = len(train_x[0])
@@ -50,7 +50,7 @@ def train_neural_network(x):
         # print(classification)
         # # TODO up to this point
         saver = tf.train.Saver()
-        save_path = saver.save(sess, 'model/first_model.ckpt')
+        save_path = saver.save(sess, '../model/first_model.ckpt')
         print(save_path)
 
 

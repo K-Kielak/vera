@@ -1,13 +1,11 @@
-from news_processor import NewsProcessor
-from neural_network_model import NeuralNetwork
-import tensorflow as tf
 import numpy as np
+import tensorflow as tf
 
-
+from data_processing.news_processor import NewsProcessor
 
 # features scraping
 url = 'http://thugify.com/trump-offering-free-flights-to-mexico-and-africa/'
-news_proc = NewsProcessor("prepared_data/lexicon.data")
+news_proc = NewsProcessor("../prepared_data/lexicon.data")
 input_size = len(news_proc.lexicon)
 # nn = NeuralNetwork(input_size, int(input_size/2),  2)
 features = news_proc.get_features(url)
@@ -17,8 +15,8 @@ features = np.asarray(features)
 
 with tf.Session() as sess:
     # session initialization
-    saver = tf.train.import_meta_graph('model/first_model.ckpt.meta')
-    saver.restore(sess,tf.train.latest_checkpoint('./model'))
+    saver = tf.train.import_meta_graph('../model/first_model.ckpt.meta')
+    saver.restore(sess,tf.train.latest_checkpoint('../model'))
     sess.run(tf.global_variables_initializer())
     graph = tf.get_default_graph()
     x = graph.get_tensor_by_name("x:0")

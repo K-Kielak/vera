@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
+#TODO make it work for telegraph and time
 
 class Scraper:
     @staticmethod

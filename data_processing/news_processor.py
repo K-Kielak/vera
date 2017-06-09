@@ -1,7 +1,10 @@
-from tokenizer import Tokenizer
-from news_scraper import Scraper
 import random
+
 import numpy as np
+from news_scraper import Scraper
+
+from data_processing.tokenizer import Tokenizer
+
 
 # classification:
 # [legit, fake] - e.g. [1, 0] means legit
