@@ -1,7 +1,7 @@
 import random
 
 import numpy as np
-from news_scraper import Scraper
+from data_processing.news_scraper import Scraper
 
 from data_processing.tokenizer import Tokenizer
 
