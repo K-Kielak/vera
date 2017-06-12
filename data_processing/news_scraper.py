@@ -38,12 +38,16 @@ class Scraper:
         if soup.find('article', {'class': 'a-main'}):
             return soup.find('article', {'class': 'a-main'})
 
+        if soup.find('div', {'class': 'js-article-inner'}):
+            return soup.find('div', {'class': 'js-article-inner'})
+
         if soup.article:
             return soup.article
 
         if soup.find('div', {'class': 'story-body'}):
             return soup.find('div', {'class': 'story-body'})
 
+        print("article container error")
         raise ConnectionError
 
     @staticmethod

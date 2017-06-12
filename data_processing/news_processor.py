@@ -20,14 +20,14 @@ class NewsProcessor:
             for url in open(leg).read().splitlines():
                 try:
                     self.process_news(url, [1.0, 0.0])
-                except ConnectionError:
-                    print('Cannot scrap:', url)
+                except Exception:
+                    print('Connection error:', url)
 
         for fak in fakes:
             for url in open(fak).read().splitlines():
                 try:
                     self.process_news(url, [0.0, 1.0])
-                except ConnectionError:
+                except Exception:
                     print('Cannot scrap:', url)
 
         random.shuffle(self.featureset)

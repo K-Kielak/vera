@@ -62,7 +62,7 @@ class TokensExtractor(threading.Thread):
             try:
                 _, _, p = Scraper.scrap_data(url)
                 paragraphs += p
-            except ConnectionError:
+            except Exception:
                 print("Cannot scrap data for:", url)
 
         return paragraphs
