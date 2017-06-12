@@ -1,12 +1,12 @@
 import threading
 from collections import Counter
 
-from news_scraper import Scraper
+from data_processing.news_scraper import Scraper
 
 from data_processing.tokenizer import Tokenizer
 
 
-class FeaturesCreator:
+class LexiconCreator:
     def __init__(self, frequency_threshold):
         self.features = []
         self.frequency_threshold = frequency_threshold

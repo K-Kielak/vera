@@ -1,9 +1,9 @@
 import pickle
 
 import numpy as np
-from news_processor import NewsProcessor
+from data_processing.news_processor import NewsProcessor
 
-from data_processing.features_creator import FeaturesCreator
+from data_processing.lexicon_creator import LexiconCreator
 
 # TODO optimize by making sure data is scraped only one time for both lexicon and training set
 
@@ -17,10 +17,10 @@ training_set = prepared_path + "trainingset.data"
 test_size = 0.2
 
 # creating lexicon
-fc = FeaturesCreator(50)
-fc.extract_features([legit_news, fake_news])
-fc.save_features(lexicon_path)
-print('Lexicon length:', len(fc.features))
+lc = LexiconCreator(50)
+lc.extract_features([legit_news, fake_news])
+lc.save_features(lexicon_path)
+print('Lexicon length:', len(lc.features))
 
 #creating training set
 processor = NewsProcessor(lexicon_path)
