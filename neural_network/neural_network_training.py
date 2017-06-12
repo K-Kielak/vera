@@ -6,11 +6,11 @@ import tensorflow as tf
 from neural_network.neural_network_model import NeuralNetwork
 
 # initialization
-train_x, train_y = pickle.load(open("../prepared_data/trainingset.data", "rb"))
+train_x, train_y, test_x, test_y = pickle.load(open("../prepared_data/trainingset.data", "rb"))
 # print(train_x)
 # print(train_y)
 input_data_size = len(train_x[0])
-nn = NeuralNetwork(input_data_size, 2, int(input_data_size/2))
+nn = NeuralNetwork(input_data_size, 2, int(input_data_size*2))
 # batch_size = 10 # uncomment when data set is large enough
 epochs = 100
 x = tf.placeholder('float', [None, input_data_size], name='x')
@@ -34,8 +34,9 @@ def train_neural_network(x):
             _, c = sess.run([optimizer, cost], feed_dict={x: batch_x, y: batch_y})
             # print('Epoch', e+1, '/', epochs, 'completed')
             correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
-            accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
-            print('Accuracy:', accuracy.eval({x: train_x, y: train_y}))
+            train_accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
+            print('Training set accuracy:', train_accuracy.eval({x: train_x, y: train_y}))
+            print('Testing set accuracy:', train_accuracy.eval({x: test_x, y: test_y}))
 
         # url = 'http://thugify.com/trump-offering-free-flights-to-mexico-and-africa/' # TODO delete all of this
         # news_proc = NewsProcessor("prepared_data/lexicon.data")
