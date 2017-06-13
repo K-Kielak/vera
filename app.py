@@ -23,4 +23,5 @@ def vera():
     except Exception:
         return 'error'
 
-app.run()
+if __name__ == '__main__':
+    app.run()
