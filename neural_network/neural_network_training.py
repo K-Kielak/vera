@@ -12,11 +12,11 @@ train_x, train_y, test_x, test_y = pickle.load(open("../prepared_data/trainingse
 input_data_size = len(train_x[0])
 nn = NeuralNetwork(input_data_size, 2, int(input_data_size*2))
 # batch_size = 10 # uncomment when data set is large enough
-epochs = 100
+epochs = 180
 x = tf.placeholder('float', [None, input_data_size], name='x')
 y = tf.placeholder('float', name='y')
+print("Trainingset size:", len(train_x))
 print('Data initialized')
-
 
 # actual code
 def train_neural_network(x):
@@ -35,8 +35,8 @@ def train_neural_network(x):
             # print('Epoch', e+1, '/', epochs, 'completed')
             correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
             train_accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
-            print('Training set accuracy:', train_accuracy.eval({x: train_x, y: train_y}))
-            print('Testing set accuracy:', train_accuracy.eval({x: test_x, y: test_y}))
+            print(str(e+1) + ': Training set accuracy:', train_accuracy.eval({x: train_x, y: train_y}))
+            print(str(e+1) + ': Testing set accuracy:', train_accuracy.eval({x: test_x, y: test_y}))
 
         # url = 'http://thugify.com/trump-offering-free-flights-to-mexico-and-africa/' # TODO delete all of this
         # news_proc = NewsProcessor("prepared_data/lexicon.data")

@@ -10,23 +10,40 @@ from data_processing.lexicon_creator import LexiconCreator
 #parameters
 raw_path = '../raw_data/'
 prepared_path = '../prepared_data/'
-legit_news = raw_path + 'legit.raw'
-fake_news = raw_path + 'fake.raw'
+legit_news1 = raw_path + 'legit1.raw'
+fake_news1 = raw_path + 'fake1.raw'
+legit_news2 = raw_path + 'legit2.raw'
+fake_news2 = raw_path + 'fake2.raw'
 lexicon_path = prepared_path + 'lexicon.data'
 training_set = prepared_path + "trainingset.data"
 test_size = 0.2
 
-# creating lexicon
-lc = LexiconCreator(50)
-lc.extract_features([legit_news, fake_news])
-lc.save_features(lexicon_path)
-print('Lexicon length:', len(lc.features))
+# # creating lexicon
+# lc = LexiconCreator(80)
+#
+# lc.extract_features([legit_news1, fake_news1, legit_news2, fake_news2])
+# lc.save_features(lexicon_path)
+# print('Lexicon length:', len(lc.features))
 
 #creating training set
 processor = NewsProcessor(lexicon_path)
-processor.process_newsset([legit_news], [fake_news])
+processor.process_newsset([legit_news1, legit_news2], [fake_news1, fake_news2])
 print(processor.featureset)
+
 features = np.asarray(processor.featureset)
+ys = features[:,1]
+real_news = 0
+fake_news = 0
+for y in ys:
+    if y[0] is 1 and y[1] is 0:
+        real_news += 1
+    elif y[0] is 0 and y[1] is 1:
+        fake_news += 1
+    else:
+        print(y[1])
+
+print("real news in the featureset:", real_news)
+print("fake news in the featureset:", fake_news)
 training_size = int(test_size*len(features))
 train_x = list(features[:,0][:-training_size])
 train_y = list(features[:,1][:-training_size])

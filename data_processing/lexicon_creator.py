@@ -1,9 +1,6 @@
 import threading
 from collections import Counter
-
-from data_processing.news_scraper import Scraper
-
-from data_processing.tokenizer import Tokenizer
+from data_processing.tokens_extractor import TokensExtractor
 
 
 class LexiconCreator:
@@ -12,16 +9,20 @@ class LexiconCreator:
         self.frequency_threshold = frequency_threshold
 
     def extract_features(self, files):
-        tokens = []
+        tokensset = []
         lock = threading.Lock()
         extractors = []
         for file in files:
-            extr = TokensExtractor(file, tokens, lock)
+            extr = TokensExtractor(file, tokensset, lock)
             extr.start()
             extractors.append(extr)
 
-        for e in extractors:
-            e.join()
+        for extr in extractors:
+            extr.join()
+
+        tokens = []
+        for tks in tokensset:
+            tokens += tks
 
         self.features = self._get_frequent_tokens(tokens)
 
@@ -38,31 +39,3 @@ class LexiconCreator:
                 frequent_tokens.append(t)
 
         return frequent_tokens
-
-
-class TokensExtractor(threading.Thread):
-    def __init__(self, f, tokens, lock):
-        super(TokensExtractor, self).__init__()
-        self.file = f
-        self.tokens = tokens
-        self.lock = lock
-
-    def run(self):
-        urls = open(self.file).read().splitlines()
-        paragraphs = self._extract_paragraphs(urls)
-        tks = Tokenizer.tokenize(paragraphs)
-
-        with self.lock:
-            self.tokens += tks
-
-    @staticmethod
-    def _extract_paragraphs(urls):
-        paragraphs = []
-        for url in urls:
-            try:
-                _, _, p = Scraper.scrap_data(url)
-                paragraphs += p
-            except Exception:
-                print("Cannot scrap data for:", url)
-
-        return paragraphs

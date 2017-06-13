@@ -4,7 +4,7 @@ import tensorflow as tf
 from data_processing.news_processor import NewsProcessor
 
 # features scraping
-url = 'http://thugify.com/trump-offering-free-flights-to-mexico-and-africa/'
+url = 'http://www.telegraph.co.uk/business/2017/06/07/australia-extends-winning-streak-almost-26-years-without-recession/'
 news_proc = NewsProcessor("../prepared_data/lexicon.data")
 input_size = len(news_proc.lexicon)
 # nn = NeuralNetwork(input_size, int(input_size/2),  2)
@@ -22,7 +22,7 @@ with tf.Session() as sess:
     x = graph.get_tensor_by_name("x:0")
     prediction = graph.get_tensor_by_name("prediction:0")
     classification = tf.argmax(prediction, 1)
-    classification = classification.eval({x: np.array(features).reshape(1, 363)})
+    classification = classification.eval({x: np.array(features).reshape(1, 264)})
     if classification[0] < 0.5:
         print("This news is legit", classification)
     else:
