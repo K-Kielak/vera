@@ -12,7 +12,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/api/predict')
+@app.route('/predict')
 def vera():
     try:
         url = request.args.get('url')
