@@ -23,7 +23,7 @@ def vera():
         else:
             return 'real'
     except Exception:
-        return 'error'
+        return 'api-error'
 
 if __name__ == '__main__':
     app.run(debug=True)
