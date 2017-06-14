@@ -22,8 +22,8 @@ def vera():
             return 'fake'
         else:
             return 'real'
-    except Exception:
-        return 'api-error'
+    except Exception as e:
+        return str(e)
 
 if __name__ == '__main__':
     app.run(debug=True)
