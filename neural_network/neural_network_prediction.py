@@ -3,7 +3,7 @@ import tensorflow as tf
 from data_processing.news_processor import NewsProcessor
 
 class Prediction:
-    news_proc = NewsProcessor('../prepared_data/lexicon.data')
+    news_proc = NewsProcessor('prepared_data/lexicon.data')
     input_size = len(news_proc.lexicon)
     # nn = NeuralNetwork(input_size, int(input_size/2),  2)
     # x = tf.placeholder('float', [None, input_size])
@@ -15,8 +15,8 @@ class Prediction:
         features = np.asarray(features)
         with tf.Session() as sess:
             # session initialization
-            saver = tf.train.import_meta_graph('../model/first_model.ckpt.meta')
-            saver.restore(sess,tf.train.latest_checkpoint('../model'))
+            saver = tf.train.import_meta_graph('model/first_model.ckpt.meta')
+            saver.restore(sess,tf.train.latest_checkpoint('model'))
             sess.run(tf.global_variables_initializer())
             graph = tf.get_default_graph()
             x = graph.get_tensor_by_name("x:0")

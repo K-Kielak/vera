@@ -1,0 +1,12 @@
+# data
+prepared_data/scrapproof.txt
+prepared_data/trainingset.data
+raw_data/
+model/
+
+# training files
+neural_network/neural_network_model.py
+neural_network/neural_network_training.py
+data_processing/lexicon_creator.py
+data_processing/main_data_extractor.py
+
