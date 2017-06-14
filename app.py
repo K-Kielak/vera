@@ -1,3 +1,4 @@
+from collections import defaultdict
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -24,4 +25,4 @@ def vera():
         return 'error'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
