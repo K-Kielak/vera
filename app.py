@@ -1,11 +1,11 @@
-from collections import defaultdict
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask.ext.cors import CORS, cross_origin
 from neural_network.neural_network_prediction import Prediction
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/')
 def index():
@@ -13,6 +13,7 @@ def index():
 
 
 @app.route('/predict')
+@cross_origin()
 def vera():
     try:
         url = request.args.get('url')
