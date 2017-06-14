@@ -29,7 +29,6 @@ class Prediction:
             else:
                 print("This is probably fake news", classification)
                 return True
->>>>>>> flask-server
 
      # url = '' # TODO delete all of this
      #        classification = tf.argmax(prediction, 1)
