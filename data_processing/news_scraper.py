@@ -70,9 +70,9 @@ class Scraper:
         if soup.find('div', {'class': 'theiaPostSlider_slides'}):
             return soup.find('div', {'class': 'theiaPostSlider_slides'})
 
-        f = open('../prepared_data/scrapproof.txt', 'a')
-        f.write("article container: " + url + '\n')
-        print("article container error")
+        # f = open('../prepared_data/scrapproof.txt', 'a')
+        # f.write("article container: " + url + '\n')
+        # print("article container error")
         raise ConnectionError
 
     @staticmethod
@@ -86,9 +86,9 @@ class Scraper:
         if article.header:
             return article.header.getText()
 
-        f = open('../prepared_data/scrapproof.txt', 'a')
-        f.write("title: " + url + '\n')
-        print('title error')
+        # f = open('../prepared_data/scrapproof.txt', 'a')
+        # f.write("title: " + url + '\n')
+        # print('title error')
         raise ConnectionError
 
     @staticmethod
@@ -96,8 +96,8 @@ class Scraper:
         if article:
             return list(p.get_text().lower() for p in (article.findAll('p') + article.findAll('span')))
         else:
-            f = open('../prepared_data/scrapproof.txt', 'a')
-            f.write("paragraphs: " + url + '\n')
+            # f = open('../prepared_data/scrapproof.txt', 'a')
+            # f.write("paragraphs: " + url + '\n')
             raise ConnectionError
 
 # # TESTS
