@@ -10,9 +10,9 @@ train_x, train_y, test_x, test_y = pickle.load(open("../prepared_data/trainingse
 # print(train_x)
 # print(train_y)
 input_data_size = len(train_x[0])
-nn = NeuralNetwork(input_data_size, 2, int(input_data_size*2))
+nn = NeuralNetwork(input_data_size, 2, int(input_data_size/1))
 # batch_size = 10 # uncomment when data set is large enough
-epochs = 180
+epochs = 100
 x = tf.placeholder('float', [None, input_data_size], name='x')
 y = tf.placeholder('float', name='y')
 print("Trainingset size:", len(train_x))

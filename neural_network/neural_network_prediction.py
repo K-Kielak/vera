@@ -9,7 +9,6 @@ class Prediction:
     # x = tf.placeholder('float', [None, input_size])
     # y = tf.placeholder('float')
 
-
     def is_fake(url):
         features = Prediction.news_proc.get_features(url)
         features = np.asarray(features)
@@ -31,14 +30,3 @@ class Prediction:
             else:
                 print("This is probably fake news")
                 return True
-
- # url = '' # TODO delete all of this
- #        classification = tf.argmax(prediction, 1)
- #        classification = classification.eval({x: np.array(feats).reshape(1, 363)})
- #        if classification[0] < 0.5:
- #            print("This news is legit")
- #        else:
- #            print("This is probably fake news")
- #
- #        print(classification)
- #        # TODO up to this point
